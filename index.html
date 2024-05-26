@@ -16,24 +16,29 @@
     <link rel="stylesheet" href="./Libs/JqueryUI/jquery-ui.min.css">
     <script src="./JS/script.js"></script>
     <script>
-  if ('serviceWorker' in navigator && 'PushManager' in window) {
-  console.log('Service Worker and Push are supported');
+      if ("serviceWorker" in navigator) {
+  navigator.serviceWorker
+    .register("/sw.js")
+    .then((registration) => {
+      registration.addEventListener("updatefound", () => {
+        // If updatefound is fired, it means that there's
+        // a new service worker being installed.
+        const installingWorker = registration.installing;
+        console.log(
+          "A new service worker is being installed:",
+          installingWorker,
+        );
 
-  navigator.serviceWorker.register('sw.js')
-  .then(function(swReg) {
-    console.log('Service Worker is registered', swReg);
-
-    swRegistration = swReg;
-  })
-  .catch(function(error) {
-    console.error('Service Worker Error', error);
-  });
-    </script>
-    <script>
-  } else {
-  console.warn('Push messaging is not supported');
-  pushButton.textContent = 'Push Not Supported';
-  }
+        // You can listen for changes to the installing service worker's
+        // state via installingWorker.onstatechange
+      });
+    })
+    .catch((error) => {
+      console.error(`Service worker registration failed: ${error}`);
+    });
+} else {
+  console.error("Service workers are not supported.");
+}
     </script>
     <script type="text/javascript" src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
     <link rel="manifest" href="./manifest.json">
