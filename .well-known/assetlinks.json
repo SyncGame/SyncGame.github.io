@@ -1,0 +1,8 @@
+[{
+      "relation": ["delegate_permission/common.handle_all_urls"],
+      "target": {
+        "namespace": "android_app",
+        "package_name": "app.vercel.syncgaming.twa",
+        "sha256_cert_fingerprints": ["39:47:5B:7D:6E:BB:66:54:46:EC:A2:54:89:05:B5:E9:97:6A:44:FB:C2:D1:E5:DD:9D:6E:B9:D6:38:49:F4:75"]
+      }
+    }]
